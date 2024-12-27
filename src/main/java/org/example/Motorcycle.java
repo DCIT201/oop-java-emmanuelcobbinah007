@@ -3,10 +3,6 @@ package org.example;
 public class Motorcycle extends Vehicle {
     private String engineType;
 
-    public String getEngineType() {
-        return engineType;
-    }
-
     // Constructor
     public Motorcycle(int vehicleId, String make, String model, int year, double rentalPricePerDay, String color, String licensePlate, String engineType) {
         super(vehicleId, make, model, year, rentalPricePerDay, color, licensePlate);
@@ -18,12 +14,16 @@ public class Motorcycle extends Vehicle {
         this.engineType = engineType;
     }
 
+    public String getEngineType() {
+        return engineType;
+    }
+
     @Override
     public double calculateRentalPrice(int daysRented) {
-        double basePrice = 50 * daysRented;
+        double basePrice = getRentalPricePerDay() * daysRented;
 
-        if (engineType.equalsIgnoreCase("Sportbike")) {
-            basePrice *= 1.2;
+        if (engineType.equalsIgnoreCase("V-4 Engine")) {
+            basePrice += getRentalPricePerDay() * 1.2;
         }
         return basePrice;
     }
