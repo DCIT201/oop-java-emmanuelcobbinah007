@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
 
-    private Customer customer; // Declare the Customer object
-    private Car car1; // Declare a Car object for reuse
+    private Customer customer;
+    private Car car1;
     private Car car2;
 
     @BeforeEach
