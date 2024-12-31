@@ -20,10 +20,11 @@ public class RentalAgency {
     }
 
     // Rental Agency Methods
-    public void showVehicles() {
-        for (Vehicle vehicle : vehicles) {
-            System.out.println(vehicle);
-        }
+    public List<Vehicle> showVehicles() {
+//        for (Vehicle vehicle : vehicles) {
+//            System.out.println(vehicle);
+//        }
+        return vehicles;
     }
 
     public List<Vehicle> listAvailableVehicles() {
@@ -34,6 +35,12 @@ public class RentalAgency {
                 availableVehicles.add(vehicle);
             }
         }
+
+        for(Vehicle vehicle : availableVehicles) {
+            System.out.println(vehicle.getVehicleDetails());
+            System.out.println(" ");
+        }
+
 
         return availableVehicles;
     }
@@ -64,8 +71,27 @@ public class RentalAgency {
         customer.rentVehicle(vehicle, rentalDays);
     }
 
-    public void rentVehicle(Vehicle vehicle) {
-        vehicles.add(vehicle);
+    public boolean rentVehicle(Vehicle vehicle) {
+        if (vehicle.getAvailable()) {
+            vehicles.add(vehicle);
+            vehicle.setAvailable(false);
+            return true;
+        } else {
+            System.out.println("Vehicle is not available");
+            return false;
+        }
+
+    }
+
+    public boolean returnVehicle(Vehicle vehicle) {
+        if (!vehicle.getAvailable()) {
+            vehicles.remove(vehicle);
+            vehicle.setAvailable(true);
+            return true;
+        } else {
+            System.out.println("Vehicle was not rented");
+            return false;
+        }
     }
 
     public void processRental(Customer customer, Vehicle vehicle) {
