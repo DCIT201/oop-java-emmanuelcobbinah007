@@ -28,7 +28,7 @@ class RentalAgencyTest {
         days = 5;
         car1 = new Car(66738, "Honda", "Civic", 2017, 86.0, "Red", "DC-2779-19", 4, true, true);
         car2 = new Car(66739, "Toyota", "Corolla", 2018, 90.0, "Blue", "DC-2780-19", 4, true, true);
-        car3 = new Car(12345, "Hyndai", "Corolla", 2020, 75.5, "Black", "GT-1234-20", 4, true, false);
+        car3 = new Car(12345, "Hyundai", "Corolla", 2020, 75.5, "Black", "GT-1234-20", 4, true, false);
         rentalAgency.addVehicle(car1);
         rentalAgency.addVehicle(car2);
         rentalAgency.addVehicle(car3);
@@ -41,17 +41,12 @@ class RentalAgencyTest {
 
     @Test
     void showVehicles() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(outputStream));
-        rentalAgency.showVehicles();
+        List<Vehicle> vehicles = rentalAgency.showVehicles();
 
-        System.setOut(originalOut);
-
-        String output = outputStream.toString().trim();
-        assertTrue(output.contains(car1.toString()), "Output should contain details of car1.");
-        assertTrue(output.contains(car2.toString()), "Output should contain details of car2.");
-
+        assertNotNull(vehicles, "The list of vehicles should not be null.");
+        assertTrue(vehicles.contains(car1), "The list should contain car1.");
+        assertTrue(vehicles.contains(car2), "The list should contain car2.");
+        assertEquals(3, vehicles.size(), "The list should contain exactly 3 vehicles."); // Adjust size based on test data
 
     }
 
